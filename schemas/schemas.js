@@ -9,7 +9,9 @@ const schemaAdd = Joi.object({
     })
     .required(),
 
-  phone: Joi.string().required(),
+  phone: Joi.string()
+  .pattern(/^[+0-9]{13}$/)
+  .required(),
 });
 
 const schemaUpdate = Joi.object({
@@ -20,7 +22,9 @@ const schemaUpdate = Joi.object({
     tlds: { allow: ["com", "net"] },
   }),
 
-  phone: Joi.string().min(1),
+  phone: Joi.string()
+  .pattern(/^[+0-9]{13}$/)
+  .required(),
 });
 
 module.exports = { schemaAdd, schemaUpdate };

@@ -13,7 +13,9 @@ module.exports = {
         })
         .required(),
 
-      phone: Joi.string().required(),
+        phone: Joi.string()
+        .pattern(/^[+0-9]{1}$/)
+        .required(),
     });
     const validationRresult = schema.validate(req.body);
     if (validationRresult.error) {
@@ -32,7 +34,8 @@ module.exports = {
         tlds: { allow: ["com", "net"] },
       }),
 
-      phone: Joi.string().min(1),
+      phone: Joi.string()
+      .pattern(/^[+0-9]{13}$/),
     });
     const validationRresult = schema.validate(req.body);
     if (validationRresult.error) {

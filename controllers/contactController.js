@@ -14,23 +14,17 @@ const getContact = async (req, res, next) => {
 
     res.status(200).json({ contacts });
   } catch (error) {
-    // res.status(500).json({ message: "error error" });
     next(error);
   }
 };
 
 const contactByIdGet = async (req, res, next) => {
   try {
-    const IdContact = await getContactById(req.params.contactId);
-    if (!IdContact) {
+    const idContacts = await getContactById(req.params.contactId);
+    if (!idContacts) {
       throw new NotFound({ message: "not found" });
     }
-    res.status(200).json({ IdContact });
-    // next();
-    // if (!IdContact) {
-    //   next();
-    // }
-    // return res.status(200).json({ IdContact });
+    res.status(200).json({ idContacts });
   } catch (error) {
     next(error);
   }
@@ -39,15 +33,6 @@ const contactByIdGet = async (req, res, next) => {
 const contactRemove = async (req, res, next) => {
   try {
     const necessaryContact = await removeContact(req.params.contactId);
-    //   if (necessaryContact) {
-    //     return res.status(200).json({ message: "contact deleted" });
-    //   }
-    //         next();
-
-    // if (!necessaryContact) {
-    //   next();
-    // }
-
     if (!necessaryContact) {
       const error = new Error({ message: "not found" });
       error.status = 404;
@@ -76,15 +61,6 @@ const contactUpdate = async (req, res, next) => {
       req.params.contactId,
       req.body
     );
-
-    //   if (necessaryContact) {
-    //     return res.status(200).json({ necessaryContact });
-    //   }
-    //   next();
-
-    // if (!necessaryContact) {
-    //   next();
-    // }
 
     if (!necessaryContact) {
       const error = new Error({ message: "not found" });

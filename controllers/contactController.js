@@ -53,4 +53,22 @@ const contactAdd = async (req, res, next) => {
     }
   };
 
+  const contactUpdate = async (req, res, next) => {
+    try {
+      const necessaryContact = await Contact.findByIdAndUpdate(
+        req.params.contactId,
+        req.body,
+        { new: true }
+      );
+  
+      if (!necessaryContact) {
+        throw new NotFound({ message: "not found" });
+      }
+  
+      res.status(200).json({ necessaryContact });
+    } catch (error) {
+      next(error);
+    }
+  };
+  
   

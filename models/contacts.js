@@ -1,17 +1,33 @@
-const listContacts = async () => {}
+const { Schema, model } = require("mongoose");
+const handleSchemaErrors = require("../helpers/handleSchemaErrors");
 
-const getContactById = async (contactId) => {}
+const contactsSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Set name for contact"],
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    favorite: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { versionKey: false, timestamps: true }
+);
 
-const removeContact = async (contactId) => {}
+contactsSchema.post("save", handleSchemaErrors);
 
-const addContact = async (body) => {}
+const Contact = model("contact", contactsSchema);
 
-const updateContact = async (contactId, body) => {}
+module.exports = Contact;
 
-module.exports = {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-}
+//

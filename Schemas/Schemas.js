@@ -8,7 +8,9 @@ const addSchema = Joi.object({
       tlds: { allow: ["com", "net"] },
     })
     .required(),
-  phone: Joi.string().required(),
+  phone: Joi.string()
+  .pattern(/^[+0-9]{13}$/)
+  .required(),
   favorite: Joi.boolean(),
 });
 
@@ -18,13 +20,15 @@ const updateSchema = Joi.object({
     minDomainSegments: 2,
     tlds: { allow: ["com", "net"] },
   }),
-  phone: Joi.string(),
+  phone: Joi.string()
+  .pattern(/^[+0-9]{13}$/),
   favorite: Joi.boolean(),
 }).min(1);
 
 const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });
+
 const schemas = {
   addSchema,
   updateSchema,

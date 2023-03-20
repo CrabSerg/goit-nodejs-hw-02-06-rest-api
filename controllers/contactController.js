@@ -73,6 +73,7 @@ const contactUpdate = async (req, res, next) => {
 
 const contactUpdateFavorite = async (req, res, next) => {
   try {
+    console.log('~ contactController.js [76]:', 'ssss');
     const necessaryContact = await Contact.findByIdAndUpdate(
       req.params.contactId,
       req.body,

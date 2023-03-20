@@ -30,4 +30,3 @@ const Contact = model("contact", contactsSchema);
 
 module.exports = Contact;
 
-//

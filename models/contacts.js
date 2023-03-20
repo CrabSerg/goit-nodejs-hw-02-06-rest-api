@@ -26,16 +26,6 @@ const contactsSchema = new Schema(
 
 contactsSchema.post("save", handleSchemaErrors);
 
-const removeContact = async (contactId) => {}
+const Contact = model("contact", contactsSchema);
 
-const addContact = async (body) => {}
-
-const updateContact = async (contactId, body) => {}
-
-module.exports = {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-}
+module.exports = Contact;

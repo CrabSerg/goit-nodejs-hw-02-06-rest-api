@@ -8,7 +8,7 @@ const addSchema = Joi.object({
       tlds: { allow: ["com", "net"] },
     })
     .required(),
-  phone: Joi.string()
+    phone: Joi.string()
   .pattern(/^[+0-9]{13}$/)
   .required(),
   favorite: Joi.boolean(),
@@ -28,7 +28,6 @@ const updateSchema = Joi.object({
 const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });
-
 const schemas = {
   addSchema,
   updateSchema,
@@ -36,3 +35,4 @@ const schemas = {
 };
 
 module.exports = schemas;
+

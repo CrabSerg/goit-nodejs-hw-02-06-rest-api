@@ -1,30 +1,38 @@
 const Joi = require("joi");
-const schemaAdd = Joi.object({
-  name: Joi.string().min(3).max(30).required(),
 
+const addSchema = Joi.object({
+  name: Joi.string().min(3).max(30).required(),
   email: Joi.string()
     .email({
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
     })
     .required(),
-
-  phone: Joi.string()
+    phone: Joi.string()
   .pattern(/^[+0-9]{13}$/)
   .required(),
+  favorite: Joi.boolean(),
 });
 
-const schemaUpdate = Joi.object({
+const updateSchema = Joi.object({
   name: Joi.string().min(3).max(30),
-
   email: Joi.string().email({
     minDomainSegments: 2,
     tlds: { allow: ["com", "net"] },
   }),
-
   phone: Joi.string()
-  .pattern(/^[+0-9]{13}$/)
-  .required(),
-});
+  .pattern(/^[+0-9]{13}$/),
+  favorite: Joi.boolean(),
+}).min(1);
 
-module.exports = { schemaAdd, schemaUpdate };
+const updateFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required(),
+});
+const schemas = {
+  addSchema,
+  updateSchema,
+  updateFavoriteSchema,
+};
+
+module.exports = schemas;
+

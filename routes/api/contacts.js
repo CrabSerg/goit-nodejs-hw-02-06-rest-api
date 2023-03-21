@@ -11,30 +11,40 @@ const {
   contactUpdateFavorite,
 } = require("../../controllers/contactController");
 
-const { validation, isValidId } = require("../../middlewares");
+const {
+  validation,
+  isValidId,
+  tokenVerification,
+  controllerWrapper,
+} = require("../../middlewares");
 
 const schemas = require("../../schemas/schemas");
 
-router.get("/", getContact);
+router.get("/", tokenVerification, controllerWrapper(getContact));
 
-router.get("/:contactId", isValidId, contactByIdGet);
+router.get("/:contactId", isValidId, controllerWrapper(contactByIdGet));
 
-router.post("/", validation(schemas.addSchema), contactAdd);
+router.post(
+  "/",
+  tokenVerification,
+  validation(schemas.addSchema),
+  controllerWrapper(contactAdd)
+);
 
-router.delete("/:contactId", isValidId, contactRemove);
+router.delete("/:contactId", isValidId, controllerWrapper(contactRemove));
 
 router.put(
   "/:contactId",
   isValidId,
   validation(schemas.updateSchema),
-  contactUpdate
+  controllerWrapper(contactUpdate)
 );
 
 router.patch(
   "/:contactId/favorite",
   isValidId,
   validation(schemas.updateFavoriteSchema),
-  contactUpdateFavorite
+  controllerWrapper(contactUpdateFavorite)
 );
 
 module.exports = router;

@@ -29,7 +29,7 @@ const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });
 
-const joiSingupSchema = Joi.object({
+const joiRegisterSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
   password: Joi.string().min(6).required(),
@@ -48,9 +48,9 @@ const schemas = {
   addSchema,
   updateSchema,
   updateFavoriteSchema,
-  joiSingupSchema,
-  joiLoginSchema,
+  joiRegisterSchema,
   joiSubscriptionSchema,
+  joiLoginSchema,
 };
 
 module.exports = schemas;

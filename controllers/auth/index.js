@@ -1,5 +1,5 @@
-const singup = require("./singup");
+const register = require("./register");
 const login = require("./login");
 const logout = require("./logout")
 
-module.exports = { singup, login, logout };
+module.exports = { register, login, logout };

@@ -9,8 +9,7 @@ const {
   contactAdd,
   contactUpdate,
   contactUpdateFavorite,
-} = require("../../controllers/contactController");
-
+} = require("../../controllers/contacts/contactController");
 const {
   validation,
   isValidId,

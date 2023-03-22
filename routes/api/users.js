@@ -5,21 +5,21 @@ const {
   tokenVerification,
   controllerWrapper,
 } = require("../../middlewares");
-const { singup, login, logout } = require("../../controllers/auth");
+const { register, login, logout } = require("../../controllers/auth");
 const { getCurrent, updateSubscription } = require("../../controllers/user");
 
 const {
-  joiSingupSchema,
+  joiRegisterSchema,
   joiLoginSchema,
   joiSubscriptionSchema,
 } = require("../../Schemas/Schemas");
 
 const router = express.Router();
 
-router.post("/singup", validation(joiSingupSchema), controllerWrapper(singup));
+router.post("/register", validation(joiRegisterSchema), controllerWrapper(register));
 router.post("/login", validation(joiLoginSchema), controllerWrapper(login));
 router.get("/current", tokenVerification, controllerWrapper(getCurrent));
-router.get("/logout", tokenVerification, controllerWrapper(logout));
+router.post("/logout", tokenVerification, controllerWrapper(logout));
 router.patch(
   "/",
   tokenVerification,

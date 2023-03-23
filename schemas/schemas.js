@@ -28,10 +28,29 @@ const updateSchema = Joi.object({
 const updateFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });
+
+const joiRegisterSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().required(),
+  password: Joi.string().min(6).required(),
+});
+
+const joiLoginSchema = Joi.object({
+  email: Joi.string().required(),
+  password: Joi.string().min(6).required(),
+});
+
+const joiSubscriptionSchema = Joi.object({
+  subscription: Joi.string().valid("starter", "pro", "business").required(),
+});
+
 const schemas = {
   addSchema,
   updateSchema,
   updateFavoriteSchema,
+  joiRegisterSchema,
+  joiSubscriptionSchema,
+  joiLoginSchema,
 };
 
 module.exports = schemas;

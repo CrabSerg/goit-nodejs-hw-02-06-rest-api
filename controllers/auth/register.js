@@ -11,15 +11,16 @@ const register = async (req, res, next) => {
       throw new Conflict({ message: "Email in use" });
     }
 
-    const avatarURL = gravatar.url(email);
-    
+    const avatarURL = await gravatar.url(email, {protocol: 'http', s: '100'});
+    console.log (avatarURL)
     const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
     const result = await User.create({
       name,
       email,
+      avatarURL,
       password: hashPassword,
       subscription: "starter",
-    });
+      });
     res.status(201).json(result);
 };
 

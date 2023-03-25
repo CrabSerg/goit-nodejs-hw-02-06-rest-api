@@ -1,6 +1,5 @@
 const { Unauthorized } = require("http-errors");
 const jwt = require("jsonwebtoken");
-
 const User = require("../models/users");
 
 const { SECRET_KEY } = process.env;
@@ -8,7 +7,6 @@ const { SECRET_KEY } = process.env;
 const tokenVerification = async (req, res, next) => {
   const { authorization = "" } = req.headers;
   const [bearer, token] = authorization.split(" ");
-
 
   try {
     if (bearer !== "Bearer") {

@@ -22,11 +22,7 @@ const updateAvatar = async (req, res) => {
         throw error;
       });
 
-    // await fs.rename(tempUpload, resultUpload);
-
-    // const avatarURL = path.join("avatars", imageName);
     const avatarURL = `${BASE_URL}/avatars/${imageName}`;
-    // console.log(avatarURL);
 
     await User.findByIdAndUpdate(req.user._id, { avatarURL });
 

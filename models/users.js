@@ -7,7 +7,6 @@ const userSchema = Schema(
       type: String,
       required: true,
     },
-
     password: {
       type: String,
       required: [true, "Password is required"],
@@ -25,6 +24,10 @@ const userSchema = Schema(
     token: {
       type: String,
       default: null,
+    },
+    avatarURL: {
+      type: String,
+      required: true,
     },
   },
   { versionKey: false, timestamps: true }

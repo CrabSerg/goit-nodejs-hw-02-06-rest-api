@@ -11,12 +11,15 @@ const {
   getCurrent,
   updateSubscription,
   updateAvatar,
+  verifyEmail,
+  resendVerifyEmail,
 } = require("../../controllers/user");
 
 const {
   joiRegisterSchema,
   joiLoginSchema,
   joiSubscriptionSchema,
+  joiVerifyEmailSchema,
 } = require("../../Schemas/Schemas");
 
 const router = express.Router();
@@ -37,6 +40,13 @@ router.patch(
   tokenVerification,
   upload.single("avatar"),
   controllerWrapper(updateAvatar)
+);
+
+router.get("/verify/:verificationToken", controllerWrapper(verifyEmail));
+router.post(
+  "/verify",
+  validation(joiVerifyEmailSchema),
+  controllerWrapper(resendVerifyEmail)
 );
 
 module.exports = router;

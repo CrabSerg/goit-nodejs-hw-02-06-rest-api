@@ -20,13 +20,14 @@ const {
 
 const schemas = require("../../schemas/schemas");
 
-router.get("/", tokenVerification, controllerWrapper(getContact));
+router.use(tokenVerification);
+
+router.get("/", controllerWrapper(getContact));
 
 router.get("/:contactId", isValidId, controllerWrapper(contactByIdGet));
 
 router.post(
   "/",
-  tokenVerification,
   validation(schemas.addSchema),
   controllerWrapper(contactAdd)
 );
